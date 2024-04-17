@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">BrokenApp</string>
-    <string name="supersecretkey">C&amp;F)H@McQfTjWnZr4u7x!A%D*G-KaNdR</string> <!-- I can be fired for that -->
+    <string name="supersecretkey">C&amp;F)H@McQfTjWnZr4u7x!A%D*G-KaNdR</string>
+    <string name="somar">somar</string>
+    <string name="result">Result is %2d</string>
+    <string name="type_number">Type a number</string>
+    <string name="type_another_number">Type another number</string>
 </resources>

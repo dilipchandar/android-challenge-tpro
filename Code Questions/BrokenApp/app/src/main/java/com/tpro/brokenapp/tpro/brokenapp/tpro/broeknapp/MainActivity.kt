@@ -1,50 +1,72 @@
 package com.tpro.brokenapp.tpro.brokenapp.tpro.broeknapp
+
 import android.app.*
 import android.os.*
-import android.widget.*
+import android.text.Editable
+import android.text.TextWatcher
 import com.tpro.brokenapp.R
+import kotlinx.android.synthetic.main.activity_main.button
+import kotlinx.android.synthetic.main.activity_main.editext1
+import kotlinx.android.synthetic.main.activity_main.editext2
+import kotlinx.android.synthetic.main.activity_main.rsult
+import java.util.Locale
 
 
+class MainActivity: Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
+        editext1.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+            }
 
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+            }
 
+            override fun afterTextChanged(p0: Editable?) {
+                button.isEnabled =
+                    editext1.text.toString().isNotEmpty() && editext2.text.toString().isNotEmpty()
+            }
+        })
 
+        editext2.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-class MainActivity
-  : Activity() {
-  override fun onCreate(savedInstanceState:Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-      findViewById<Button>(R.id.button)!!.setOnClickListener {
-      findViewById<EditText>(R.id.editext1).text.toString().toLowerCase()?.let { text1 ->
-          val text2 = findViewById<EditText>(R.id.editext2).text.toString().toLowerCase()
-          var sum = value(text1).getValue() + value(text2).getValue()
-          findViewById<TextView>(R.id.rsult).text = sum.toString()!!
-      }
-      }
-  }
+            }
 
-  override fun onPostCreate(savedInstanceState:Bundle?) { super.onPostCreate(savedInstanceState)
-  }
-}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-class value(val integer:String) {
+            }
 
-  fun getValue(): Int {
-    if (integer == "0") { return "0".toString().toInt() * 2 } else {
-Thread.sleep(50) //haha
-return integer.toInt()
+            override fun afterTextChanged(p0: Editable?) {
+                button.isEnabled =
+                    editext1.text.toString().isNotEmpty() && editext2.text.toString().isNotEmpty()
+            }
+        })
+
+       button.setOnClickListener {
+            editext1.text.toString().toLowerCase(Locale.ROOT)
+                .let { text1 ->
+                    val text2 = editext2.text.toString()
+                        .toLowerCase(Locale.ROOT)
+                    val sum = Value(text1).getValue() + Value(text2).getValue()
+                    rsult.text = getString(R.string.result, sum)
+                }
+        }
     }
-  }
-
 }
 
-//class value2(val integer: String) {
-//
-//  fun getValue(): Int {
-//    return integer.toInt()
-//  }
-//
-//}
+class Value(private val integer: String) {
+    fun getValue(): Int {
+        return if (integer == "0") {
+            "0".toInt() * 2
+        } else {
+            Thread.sleep(50) //haha
+            integer.toInt()
+        }
+    }
+
+}
